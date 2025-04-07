@@ -1,13 +1,11 @@
-# tool만들기 기본 틀
-
-### 패키지 설치
-```
-npm install
-```
+# ssh-tool
+- ssh를 위한 툴
 
 ### 실행
 ```
 npm run
 ```
 
-### 다른 툴 만들 시 .get 삭제
+### 사용 라이브러리
+- node-ssh
+- 

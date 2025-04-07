@@ -2,14 +2,15 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 
+import {  } from "./ssh";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(cors());
 app.use(express.json());
 
-app.post("/chat", async (req: Request, res: Response) => {
+app.post("/api/registerServerInfo", async (req: Request, res: Response) => {
   const { message, history } = req.body;
   if (!message) {
     return res.status(400).json({ error: "message is required" });
