@@ -67,3 +67,44 @@ export const registerServerInfo = async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Something went wrong" });
   }
 };
+
+
+/**
+ * @swagger
+ * /api/ssh/getServerList:
+ *   get:
+ *     summary: serverList를 받음
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *         description: 응답 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 response:
+ *                   type: string
+ *                   example: "안녕하세요! 무엇을 도와드릴까요?"
+ *       400:
+ *         description: 잘못된 요청
+ *       500:
+ *         description: 서버 오류
+ */
+export const getServerList = async (req: Request, res: Response) => {
+
+  const serverInfo: serverInfo = req.body;
+
+  try {
+    const { result, message } = await testConnection(serverInfo, privateKey);
+    return res.json({ result, message });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+};
