@@ -106,7 +106,7 @@ export class ServerService {
 
   async inputCommand(command: string) {
 
-    const server: Server | null = await this.serverRepository.findById(3);
+    const server: Server | null = await this.serverRepository.findById(1);
 
     if (server === null) {
       throw new Error("서버를 찾을 수 없습니다.");
@@ -121,15 +121,18 @@ export class ServerService {
 
     const privateKey: Express.Multer.File | null = this.fileStorage.readFile(serverInfo.privateKey);
 
+
     if (privateKey != null) {
       const privateKeyContent = privateKey.buffer.toString("utf8");
       const { result, message } = await this.connectServer(serverInfo, privateKey, "");
 
       if (result) {
 
-        const { result, message, output } = await this.connectServer(serverInfo, privateKey, command);
+        const response = await this.connectServer(serverInfo, privateKey, command);
         
-        
+        console.log(response)
+
+        return response;
       }
 
     } 

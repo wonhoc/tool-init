@@ -9,6 +9,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.post("/registerServerInfo", upload.single("privateKey"), serverController.registerServerInfo);
 router.get("/getServerList", serverController.getServerList);
-router.get("/inputCommand", serverController.inputCommand);
+router.post("/inputCommand", serverController.inputCommand);
 
 export default router;

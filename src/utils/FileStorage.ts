@@ -77,8 +77,8 @@ export class FileStorage {
  */
 readFile(filePath: string): Express.Multer.File | null {
   try {
-    const fullPath = path.join(this.basePath, filePath);
-    
+    const fullPath = path.join(filePath);
+
     if (fs.existsSync(fullPath)) {
       const buffer = fs.readFileSync(fullPath);
       const filename = path.basename(filePath);
