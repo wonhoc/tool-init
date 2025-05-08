@@ -3,7 +3,20 @@ import session from "express-session";
 import cors from "cors";
 import "dotenv/config";
 import { setupSwagger } from "./config/swagger";
-import sshRoutes from "./routes/sshRoutes";
+import sshRoutes from "./routes/severRoutes";
+import "reflect-metadata"; 
+import { AppDataSource } from "./config/database";
+
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("데이터베이스 연결 성공!");
+    // 서버 시작 코드...
+  })
+  .catch((error) => {
+    console.error("데이터베이스 연결 오류:", error);
+  });
+
 
 const app = express();
 
@@ -28,5 +41,7 @@ app.use(
 setupSwagger(app);
 
 app.use("/api/ssh", sshRoutes);
+
+
 
 export default app;
